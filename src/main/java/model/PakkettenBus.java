@@ -18,7 +18,12 @@ public class PakkettenBus {
     }
 
     public void laadPakket(Pakket pakket) {
-
+        int gewichtPakket = pakket.getGewicht();
+        if (totaalGewicht + gewichtPakket > maximumGewicht || gewichtPakket < 0) {
+            return;
+        }
+        lading.add(pakket);
+        totaalGewicht += pakket.getGewicht();
     }
 
     public List<Pakket> getLading() {
@@ -30,7 +35,7 @@ public class PakkettenBus {
     }
 
     public Pakket zoekZwaarstePakket() {
-       return null;
+        return null;
     }
 
 }
