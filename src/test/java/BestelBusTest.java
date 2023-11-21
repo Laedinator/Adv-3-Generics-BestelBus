@@ -56,6 +56,29 @@ public class BestelBusTest {
         assertEquals(39, testBus.getTotaalGewicht());
     }
 
+    @Test
+    public void testZoekZwaarstePakket() {
+        maakBus();
+        Pakket pakket1 = new Pakket("Mike", "Fiets", 20);
+        Pakket pakket2 = new Pakket("Aike", "Skateboard", 10);
+        Pakket pakket3 = new Pakket("Max", "Texas spel", 9);
+        testBus.laadPakket(pakket1);
+        testBus.laadPakket(pakket2);
+        testBus.laadPakket(pakket3);
+        assertEquals(pakket1, testBus.zoekZwaarstePakket());
+    }
+    @Test
+    public void testZoekZwaarstePakketMetGelijkeGewicht() {
+        maakBus();
+        Pakket pakket1 = new Pakket("Mike", "Fiets", 15);
+        Pakket pakket2 = new Pakket("Aike", "Skateboard", 15);
+        Pakket pakket3 = new Pakket("Max", "Texas spel", 9);
+        testBus.laadPakket(pakket1);
+        testBus.laadPakket(pakket2);
+        testBus.laadPakket(pakket3);
+        assertEquals(pakket2, testBus.zoekZwaarstePakket());
+    }
+
 
     private void maakBus() {
         testBus = new BestelBus<>("Blauwe Bus", 40);

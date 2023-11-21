@@ -40,7 +40,23 @@ public class BestelBus<L extends Weegbaar> {
         return totaalGewicht;
     }
 
-    public Pakket zoekZwaarstePakket() {
-        return null;
+    public L zoekZwaarstePakket() {
+        if (lading.isEmpty()) {
+            return null;
+        } else {
+            return zoekZwaarstePakket(0);
+        }
+    }
+
+    private L zoekZwaarstePakket(int index) {
+        if (lading.size() == index) {
+            return lading.get(index - 1);
+        }
+        L zwaarstePakket = zoekZwaarstePakket(index + 1);
+        if (lading.get(index).getGewicht() > zwaarstePakket.getGewicht()) {
+            return lading.get(index);
+        } else {
+            return zwaarstePakket;
+        }
     }
 }

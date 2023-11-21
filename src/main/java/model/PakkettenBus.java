@@ -35,7 +35,23 @@ public class PakkettenBus {
     }
 
     public Pakket zoekZwaarstePakket() {
-        return null;
+        if (lading.isEmpty()) {
+            return null;
+        } else {
+            return zoekZwaarstePakket(0);
+        }
+    }
+
+    private Pakket zoekZwaarstePakket(int index) {
+        if (lading.size() == index) {
+            return lading.get(index - 1);
+        }
+        Pakket zwaarstePakket = zoekZwaarstePakket(index + 1);
+        if (lading.get(index).getGewicht() > zwaarstePakket.getGewicht()) {
+            return lading.get(index);
+        } else {
+            return zwaarstePakket;
+        }
     }
 
 }
